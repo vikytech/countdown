@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Countdown until we meet 💓</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #33001b, #ff0084);
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .board-container {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 4px solid #fff;
+      border-radius: 20px;
+      padding: 2rem;
+      max-width: 600px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      color: #fff;
+      text-shadow: 0 0 10px #fff;
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      color: #ffe6f0;
+      margin-bottom: 0.4rem;
+    }
+
+    .board-row {
+      display: flex;
+      justify-content: space-evenly;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .time-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .board {
+      display: flex;
+      gap: 0.4rem;
+      justify-content: center;
+    }
+
+    .digit {
+      position: relative;
+      width: 2.5rem;
+      height: 3.5rem;
+      perspective: 1000px;
+    }
+
+    .digit-inner {
+      position: absolute;
+      width: 100%;
+      height: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border-radius: 5px;
+      line-height: 1.75rem;
+      text-align: center;
+      font-weight: 900;
+      backface-visibility: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease;
+      box-shadow: inset 0 4px 0 0 #fff, 0 0 10px #fff;
+    }
+
+    .digit-front {
+      top: 0;
+      transform: rotateX(0deg);
+    }
+
+    .digit-back {
+      bottom: 0;
+      transform: rotateX(-180deg);
+    }
+
+    .digit.flip .digit-inner.digit-front {
+      transform: rotateX(180deg);
+    }
+
+    .digit.flip .digit-inner.digit-back {
+      transform: rotateX(0deg);
+    }
+
+    .message {
+      color: #fff;
+      font-size: 1.3rem;
+      text-shadow: 0 0 5px #fff;
+      margin-top: 1.5rem;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @media (max-width: 480px) {
+      .digit {
+        width: 2rem;
+        height: 3rem;
+      }
+      .digit-inner {
+        line-height: 1.5rem;
+        font-size: 1.4rem;
+      }
+      h1 {
+        font-size: 1.2rem;
+      }
+      .message {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<div class="board-container" id="countdownContainer">
+  <h1>Counting down to meet my love on November 25th, 2025! 💖</h1>
+
+  <div>
+    <div class="section-title">Weeks Remaining</div>
+    <div class="board" id="weeks"></div>
+  </div>
+
+  <div>
+    <div class="section-title">Days Remaining</div>
+    <div class="board" id="days"></div>
+  </div>
+
+  <div class="board-row">
+    <div class="time-block">
+      <div class="section-title">Hours</div>
+      <div class="board" id="hours"></div>
+    </div>
+
+    <div class="time-block">
+      <div class="section-title">Minutes</div>
+      <div class="board" id="minutes"></div>
+    </div>
+  </div>
+
+  <div class="message" id="romanticMessage"></div>
+</div>
+
+<audio id="flipSound" src="https://assets.mixkit.co/sfx/preview/mixkit-typewriter-hard-hit-1364.mp3" preload="auto"></audio>
+<audio id="popSound" src="https://assets.mixkit.co/sfx/preview/mixkit-cartoon-toy-pop-1124.mp3" preload="auto"></audio>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+  const targetDate = new Date("2025-11-25T00:00:00");
+  const flipSound = document.getElementById("flipSound");
+  const popSound = document.getElementById("popSound");
+  const messageEl = document.getElementById("romanticMessage");
+  let initialLoad = true;
+
+  const messages = [
+    "Every minute brings me closer to your smile. 💕",
+    "Counting the heartbeats until I see you. ❤️",
+    "You make time worth counting. ⏳",
+    "Your love is my favorite destination. ✈️",
+    "Soon, my arms will be your home again. 🤗",
+    "I miss your laugh more than words can say. 😘",
+    "The calendar is my love letter to you. 📅",
+    "You're the reason I wake up smiling. ☀️",
+    "Love has a date. It’s November 25th. 💌",
+    "With every tick, I think of your kiss. 😚",
+    "One day closer to forever. 💍",
+    "I carry you in every heartbeat. 💓",
+    "Even time slows down missing you. ⏱️",
+    "This countdown is powered by love. 💗",
+    "You are my reason for every second. ⏰",
+    "Each moment apart writes our story. 📖",
+    "Can't wait to hold your hand again. 🤝",
+    "Your smile is my favorite time zone. 🕰️",
+    "You're worth the wait and so much more. 🌹",
+    "Love grows stronger with each passing day. 🌸",
+    "You + Me = Soon. ❤️",
+    "I'm falling in love with waiting for you. ✨",
+    "My heart races every time I see the countdown. 💓",
+    "Time flies to the one I love. 🕊️",
+    "I never counted anything this excitedly. 😍",
+    "Your love keeps me patient. 🧘‍♂️",
+    "This wait is full of sweet hope. 🥰",
+    "You’re my favorite thought each minute. 💭",
+    "The clock is our love poem in motion. 🕰️",
+    "Soon, I’ll be home in your hug. 🏡"
+  ];
+
+  function showRandomMessage() {
+    const msg = messages[Math.floor(Math.random() * messages.length)];
+    messageEl.textContent = msg;
+  }
+
+  function createDigits(container, valueStr) {
+    container.innerHTML = '';
+    for (let char of valueStr.padStart(2, '0')) {
+      const digit = document.createElement('div');
+      digit.className = 'digit';
+      digit.innerHTML = `
+        <div class="digit-inner digit-front">${char}</div>
+        <div class="digit-inner digit-back">${char}</div>
+      `;
+      container.appendChild(digit);
+    }
+  }
+
+  function updateStaticDigits(id, value) {
+    const container = document.getElementById(id);
+    const newStr = String(value).padStart(2, '0');
+
+    if (container.children.length !== newStr.length) {
+      createDigits(container, newStr);
+      return;
+    }
+
+    const digits = container.querySelectorAll('.digit');
+    digits.forEach((digit, idx) => {
+      const front = digit.querySelector('.digit-front');
+      const back = digit.querySelector('.digit-back');
+      const newChar = newStr[idx];
+
+      const shouldAnimate = initialLoad || front.textContent !== newChar;
+
+      if (shouldAnimate) {
+        back.textContent = newChar;
+        digit.classList.add('flip');
+        flipSound.currentTime = 0;
+        flipSound.play();
+        if (initialLoad) {
+          popSound.currentTime = 0;
+          popSound.play();
+        }
+        setTimeout(() => {
+          front.textContent = newChar;
+          digit.classList.remove('flip');
+        }, 500);
+      }
+    });
+  }
+
+  function launchConfetti() {
+    const duration = 5000;
+    const end = Date.now() + duration;
+    (function frame() {
+      confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 } });
+      confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 } });
+      if (Date.now() < end) requestAnimationFrame(frame);
+    })();
+  }
+
+  function updateCountdown() {
+    const now = new Date();
+    const diff = targetDate - now;
+
+    if (diff <= 0) {
+      clearInterval(timer);
+      document.getElementById("countdownContainer").innerHTML = `
+        <div class="message">🎉 November 25th, 2025 has arrived!</div>
+      `;
+      launchConfetti();
+      return;
+    }
+
+    const totalSeconds = Math.floor(diff / 1000);
+    const totalMinutes = Math.floor(totalSeconds / 60);
+    const totalHours = Math.floor(totalMinutes / 60);
+    const totalDays = Math.floor(totalHours / 24);
+    const weeks = Math.floor(totalDays / 7);
+    const days = totalDays;
+
+    const hours = totalHours % 24;
+    const minutes = totalMinutes % 60;
+
+    updateStaticDigits('weeks', weeks);
+    updateStaticDigits('days', days);
+    updateStaticDigits('hours', hours);
+    updateStaticDigits('minutes', minutes);
+
+    showRandomMessage();
+  }
+
+  createDigits(document.getElementById('weeks'), "00");
+  createDigits(document.getElementById('days'), "00");
+  createDigits(document.getElementById('hours'), "00");
+  createDigits(document.getElementById('minutes'), "00");
+
+  updateCountdown();
+  const timer = setInterval(updateCountdown, 60000); // Update every minute
+  setTimeout(() => { initialLoad = false; }, 2000);
+</script>
+
+</body>
+</html>
