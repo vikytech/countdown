@@ -301,7 +301,7 @@ function rotateFeaturedPhoto(index = 0) {
 
   featuredEl.style.opacity = 0;
   setTimeout(() => {
-    featuredEl.src = photoUrls[index % photoUrls.length];
+    featuredEl.src = getRandomPhoto();
     featuredEl.style.opacity = 1;
   }, 300);
 
