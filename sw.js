@@ -1,8 +1,6 @@
-const cacheName = "romantic-countdown-v2";
+const cacheName = "romantic-countdown-v3";
 const filesToCache = [
-  "./",
   "./index.html",
-  "./widget.html",
   "./manifest.json",
   "./icon-192.png",
   "./icon-512.png",
@@ -11,6 +9,7 @@ const filesToCache = [
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(cacheName).then((cache) => {
+        caches.delete
       return Promise.all(
         filesToCache.map((url) =>
           fetch(url).then((response) => {
