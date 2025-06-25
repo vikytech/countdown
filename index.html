@@ -21,7 +21,7 @@
           ) {
             deferredPrompt.prompt();
           }
-        }, 3000); // Show prompt after 3 seconds
+        }, 3000);
       });
     </script>
     <style>
@@ -189,7 +189,7 @@
       <div class="message" id="romanticMessage"></div>
     </div>
 
-    <audio
+    <!-- <audio
       id="flipSound"
       src="https://assets.mixkit.co/sfx/preview/mixkit-typewriter-hard-hit-1364.mp3"
       preload="auto"
@@ -198,10 +198,10 @@
       id="popSound"
       src="https://assets.mixkit.co/sfx/preview/mixkit-cartoon-toy-pop-1124.mp3"
       preload="auto"
-    ></audio>
+    ></audio> -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-    <script>
+    <script>      
       const targetDate = new Date("2025-11-25T00:00:00");
       const flipSound = document.getElementById("flipSound");
       const popSound = document.getElementById("popSound");
@@ -279,11 +279,11 @@
           if (shouldAnimate) {
             back.textContent = newChar;
             digit.classList.add("flip");
-            flipSound.currentTime = 0;
-            flipSound.play();
+            // flipSound.currentTime = 0;
+            // flipSound.play();
             if (initialLoad) {
-              popSound.currentTime = 0;
-              popSound.play();
+              // popSound.currentTime = 0;
+              // popSound.play();
             }
             setTimeout(() => {
               front.textContent = newChar;
@@ -348,9 +348,9 @@
       createDigits(document.getElementById("days"), "00");
       createDigits(document.getElementById("hours"), "00");
       createDigits(document.getElementById("minutes"), "00");
-
+      
       updateCountdown();
-      const timer = setInterval(updateCountdown, 60000); // Update every minute
+      const timer = setInterval(updateCountdown, 60000);
       setTimeout(() => {
         initialLoad = false;
       }, 2000);
