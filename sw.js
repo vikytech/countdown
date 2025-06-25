@@ -11,7 +11,6 @@ self.addEventListener("install", (event) => {
   self.skipWaiting();
   event.waitUntil(
     caches.open(cacheName).then((cache) => {
-        caches.delete
       return Promise.all(
         filesToCache.map((url) =>
           fetch(url).then((response) => {
