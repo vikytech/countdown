@@ -1,54 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="cache-control" content="no-cache" />
-  <meta http-equiv="expires" content="0" />
-  <meta http-equiv="pragma" content="no-cache" />
-  <title>Countdown until we meet 💓</title>
-  <link rel="manifest" href="/manifest.json" />
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <canvas id="confetti-canvas"></canvas>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <title>Countdown until we meet 💓</title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <canvas id="confetti-canvas"></canvas>
 
-  <div id="featuredPhotoContainer">
-    <img id="featuredPhoto" src="" alt="Our Moments 💘" />
-  </div>
+    <div class="board-container" id="countdownContainer">
+      <img id="featuredPhoto" src="" alt="Our Moments 💘" />
+      <h1>Counting down to meet my love on November 25th, 2025! 💖</h1>
 
-  <div class="board-container" id="countdownContainer">
-    <h1>Counting down to meet my love on November 25th, 2025! 💖</h1>
-
-    <div>
-      <div class="section-title">Weeks Remaining</div>
-      <div class="board" id="weeks"></div>
-    </div>
-
-    <div>
-      <div class="section-title">Days Remaining</div>
-      <div class="board" id="days"></div>
-    </div>
-
-    <div class="board-row">
-      <div class="time-block">
-        <div class="section-title">Hours</div>
-        <div class="board" id="hours"></div>
+      <div>
+        <div class="section-title">Weeks Remaining</div>
+        <div class="board" id="weeks"></div>
       </div>
 
-      <div class="time-block">
-        <div class="section-title">Minutes</div>
-        <div class="board" id="minutes"></div>
+      <div>
+        <div class="section-title">Days Remaining</div>
+        <div class="board" id="days"></div>
       </div>
+
+      <div class="board-row">
+        <div class="time-block">
+          <div class="section-title">Hours</div>
+          <div class="board" id="hours"></div>
+        </div>
+
+        <div class="time-block">
+          <div class="section-title">Minutes</div>
+          <div class="board" id="minutes"></div>
+        </div>
+      </div>
+
+      <div class="message" id="romanticMessage"></div>
+      <div class="message">#VikyKoVibhaGayi</div>
     </div>
 
-    <div class="message" id="romanticMessage"></div>
-    <div class="message">#VikyKoVibhaGayi</div>
-  </div>
+    <div id="photoGallery" class="gallery"></div>
 
-  <div id="photoGallery" class="gallery"></div>
-
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <script src="countdown.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="countdown.js"></script>
+  </body>
 </html>
