@@ -9,21 +9,6 @@
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("/sw.js");
       }
-
-      let deferredPrompt;
-      window.addEventListener("beforeinstallprompt", (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        setTimeout(() => {
-          if (
-            confirm(
-              "Would you like to install the romantic message widget on your home screen? 💖"
-            )
-          ) {
-            deferredPrompt.prompt();
-          }
-        }, 3000);
-      });
     </script>
     <style>
       body {
@@ -190,16 +175,6 @@
       <div class="message" id="romanticMessage"></div>
     </div>
 
-    <!-- <audio
-      id="flipSound"
-      src="https://assets.mixkit.co/sfx/preview/mixkit-typewriter-hard-hit-1364.mp3"
-      preload="auto"
-    ></audio>
-    <audio
-      id="popSound"
-      src="https://assets.mixkit.co/sfx/preview/mixkit-cartoon-toy-pop-1124.mp3"
-      preload="auto"
-    ></audio> -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <script>      
@@ -280,12 +255,6 @@
           if (shouldAnimate) {
             back.textContent = newChar;
             digit.classList.add("flip");
-            // flipSound.currentTime = 0;
-            // flipSound.play();
-            if (initialLoad) {
-              // popSound.currentTime = 0;
-              // popSound.play();
-            }
             setTimeout(() => {
               front.textContent = newChar;
               digit.classList.remove("flip");
