@@ -1,4 +1,4 @@
-const cacheName = "romantic-countdown-v1";
+const cacheName = "romantic-countdown-v2";
 const filesToCache = [
   "./",
   "./index.html",

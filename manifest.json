@@ -1,7 +1,7 @@
 {
   "name": "Countdown Until we meet 💓",
-  "short_name": "LoveWidget",
-  "start_url": "/widget.html",
+  "short_name": "Countdown",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#33001b",
   "theme_color": "#ff0084",
