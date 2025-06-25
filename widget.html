@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Romantic Messages</title>    
+    <style>
+      body {
+        margin: 0;
+        background: linear-gradient(135deg, #33001b, #ff0084);
+        font-family: "Courier New", Courier, monospace;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .widget-container {
+        background-color: rgba(255, 255, 255, 0.1);
+        border: 4px solid #fff;
+        border-radius: 20px;
+        padding: 1.5rem;
+        max-width: 500px;
+        width: 90%;
+        text-align: center;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+      }
+
+      .message {
+        color: #fff;
+        font-size: 1.4rem;
+        text-shadow: 0 0 5px #fff;
+      }
+
+      @media (max-width: 480px) {
+        .message {
+          font-size: 1.2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="widget-container">
+      <div class="message" id="romanticMessage"></div>
+    </div>
+
+    <script>
+      const messages = [
+        "Every minute brings me closer to your smile. 💕",
+        "Counting the heartbeats until I see you. ❤️",
+        "You make time worth counting. ⏳",
+        "Your love is my favorite destination. ✈️",
+        "Soon, my arms will be your home again. 🤗",
+        "I miss your laugh more than words can say. 😘",
+        "The calendar is my love letter to you. 📅",
+        "You're the reason I wake up smiling. ☀️",
+        "Love has a date. It’s November 25th. 💌",
+        "With every tick, I think of your kiss. 😚",
+        "One day closer to forever. 💍",
+        "I carry you in every heartbeat. 💓",
+        "Even time slows down missing you. ⏱️",
+        "This countdown is powered by love. 💗",
+        "You are my reason for every second. ⏰",
+        "Each moment apart writes our story. 📖",
+        "Can't wait to hold your hand again. 🤝",
+        "Your smile is my favorite time zone. 🕰️",
+        "You're worth the wait and so much more. 🌹",
+        "Love grows stronger with each passing day. 🌸",
+        "You + Me = Soon. ❤️",
+        "I'm falling in love with waiting for you. ✨",
+        "My heart races every time I see the countdown. 💓",
+        "Time flies to the one I love. 🕊️",
+        "I never counted anything this excitedly. 😍",
+        "Your love keeps me patient. 🧘‍♂️",
+        "This wait is full of sweet hope. 🥰",
+        "You’re my favorite thought each minute. 💭",
+        "The clock is our love poem in motion. 🕰️",
+        "Soon, I’ll be home in your hug. 🏡",
+      ];
+      const messageEl = document.getElementById("romanticMessage");
+      const random = Math.floor(Math.random() * messages.length);
+      messageEl.textContent = messages[random];
+
+      // Refresh every hour
+      setInterval(() => {
+        const next = Math.floor(Math.random() * messages.length);
+        messageEl.textContent = messages[next];
+      }, 60 * 60 * 1000); // 1 hour
+    </script>
+  </body>
+</html>
