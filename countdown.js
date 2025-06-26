@@ -318,3 +318,19 @@ photoUrls.slice(0, 60).forEach((url) => {
   img.alt = "Photo of us 💖";
   galleryEl.appendChild(img);
 });
+
+document.addEventListener("click", () => {
+  if (Notification.permission === "default") {
+    Notification.requestPermission().then((permission) => {
+      console.log("Notification permission:", permission);
+    });
+  }
+});
+
+document.addEventListener("hover", () => {
+  if (Notification.permission === "default") {
+    Notification.requestPermission().then((permission) => {
+      console.log("Notification permission:", permission);
+    });
+  }
+});
